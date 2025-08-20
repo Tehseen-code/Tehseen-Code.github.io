@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tehseen Ul Hassan | Android Developer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif;}
+    body {background:#f5f7fa; color:#333; line-height:1.6;}
+    html {scroll-behavior: smooth;} 
+    header {background:linear-gradient(120deg,#0f2027,#203a43,#2c5364); color:#fff; padding:80px 20px; text-align:center;}
+    header h1 {font-size:3em; margin-bottom:10px;}
+    header p {font-size:1.2em; opacity:0.9;}
+    nav {background:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:sticky; top:0; z-index:1000;}
+    nav ul {display:flex; justify-content:center; list-style:none; padding:15px 0;}
+    nav ul li {margin:0 20px;}
+    nav ul li a {text-decoration:none; font-weight:600; color:#333; transition:0.3s;}
+    nav ul li a:hover {color:#2c5364;}
+    section {padding:70px 10%;}
+    .section-title {text-align:center; font-size:2.5em; font-weight:600; margin-bottom:50px; position:relative;}
+    .section-title::after {content:''; display:block; width:60px; height:4px; background:#2c5364; margin:10px auto 0; border-radius:2px;}
+    .about p {max-width:900px; margin:auto; text-align:center; font-size:1.1em;}
+    .skills-grid, .projects-grid {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px;}
+    .skill, .project {background:#fff; border-radius:15px; padding:20px; box-shadow:0 5px 20px rgba(0,0,0,0.08); transition:transform 0.3s, box-shadow 0.3s;}
+    .skill:hover, .project:hover {transform:translateY(-8px); box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+    .skill h3 {margin-bottom:10px; color:#2c5364;}
+    .project h3 {margin-bottom:15px; color:#2c5364;}
+    .project p {font-size:0.95em; margin-bottom:10px;}
+    .project strong {color:#203a43;}
+    .cta-btn {display:inline-block; margin-top:15px; padding:10px 20px; background:#2c5364; color:#fff; border-radius:30px; text-decoration:none; font-weight:600; transition:0.3s;}
+    .cta-btn:hover {background:#0f2027;}
+    footer {background:#203a43; color:#fff; text-align:center; padding:40px 20px; margin-top:50px;}
+    footer p {margin:10px 0;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tehseen Ul Hassan</h1>
+    <p>Android Developer | Kotlin • Jetpack Compose • Firebase • REST APIs</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="about" class="about">
+    <h2 class="section-title">About Me</h2>
+    <p>I am an Android Developer passionate about building modern, scalable, and user-friendly mobile applications. With experience in Kotlin, Jetpack Compose, and Firebase, I craft apps that solve real-world problems. Currently seeking opportunities for remote jobs, internships, or freelance work to showcase my expertise in Android development.</p>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill"><h3>Languages</h3><p>Kotlin, Java, XML</p></div>
+      <div class="skill"><h3>Frameworks</h3><p>Jetpack Compose, Android SDK</p></div>
+      <div class="skill"><h3>Backend</h3><p>Firebase, REST APIs</p></div>
+      <div class="skill"><h3>Tools</h3><p>Git, GitHub, Android Studio</p></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project">
+        <h3>ClickNShop - E-Commerce App</h3>
+        <p><strong>Features:</strong> Product search by bar/categories, detailed product pages, add to cart, buy functionality, user profile management, admin panel to add/manage categories & orders.</p>
+        <p><strong>Tech Stack:</strong> Kotlin, Jetpack Compose, Firebase.</p>
+        <a href="#" class="cta-btn">View Project</a>
+      </div>
+
+      <div class="project">
+        <h3>Kisan Guide - Smart Farming App</h3>
+        <p><strong>Features:</strong> Real-time weather updates, disease scanner, Gemini AI integration, YouTube learning integration, government scheme updates for farmers.</p>
+        <p><strong>Tech Stack:</strong> Kotlin, Firebase, Gemini API, ML integration.</p>
+        <a href="#" class="cta-btn">View Project</a>
+      </div>
+
+      <div class="project">
+        <h3>Patients Review System – NSIC</h3>
+        <p><strong>Features:</strong> Patients submit reviews by age/gender, admin dashboard to analyze responses, generate pie charts by demographics & questions, export results in CSV/PDF format.</p>
+        <p><strong>Tech Stack:</strong> Kotlin, Firebase, Chart libraries, PDF/CSV exporter.</p>
+        <a href="#" class="cta-btn">View Project</a>
+      </div>
+
+      <div class="project">
+        <h3>Quick Notes App</h3>
+        <p><strong>Features:</strong> Create, edit, delete, and organize notes with a simple UI. Fast, lightweight, and fully offline-capable.</p>
+        <p><strong>Tech Stack:</strong> Kotlin, Room DB, Jetpack Compose.</p>
+        <a href="#" class="cta-btn">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <p style="text-align:center; font-size:1.1em;">Interested in working together? Feel free to reach out.</p>
+    <p style="text-align:center; margin-top:20px;">
+      <a href="mailto:tehseen161nb@gmail.com" class="cta-btn">Email Me</a>
+      <a href="https://www.linkedin.com/in/tehseen-ul-hassan-93882b2b9" target="_blank" class="cta-btn">LinkedIn</a>
+      <a href="https://github.com/Tehseen-code" target="_blank" class="cta-btn">GitHub</a>
+    </p>
+  </section>
+
+  <footer>
+    <p>© 2025 Tehseen Ul Hassan. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
