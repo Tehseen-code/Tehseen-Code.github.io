@@ -3,300 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tehseen Ul Hassan | Android Architect</title>
+    <title>TEHSEEN | Android Architect</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617;
-            --surface: #0f172a;
-            --border: rgba(255, 255, 255, 0.08);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent: #6366f1;
-            --accent-glow: rgba(99, 102, 241, 0.15);
-            --transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            --bg: #050505;
+            --card: #0d0d0d;
+            --accent: #10b981; /* Emerald */
+            --accent-glow: rgba(16, 185, 129, 0.15);
+            --text-p: #ffffff;
+            --text-s: #888888;
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .light-mode {
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --border: rgba(0, 0, 0, 0.06);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --accent: #4f46e5;
-            --accent-glow: rgba(79, 70, 229, 0.1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
         body {
             background-color: var(--bg);
-            color: var(--text-primary);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-p);
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            transition: background-color 0.6s ease;
+            line-height: 1.5;
         }
 
         /* ====== LUXURY BACKGROUND ====== */
-        .grid-bg {
+        .mesh-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(var(--border) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
-            z-index: -2; pointer-events: none;
+            background: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.1) 0, transparent 50%);
+            z-index: -2;
         }
 
-        .cursor-glow {
-            position: fixed; width: 600px; height: 600px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            border-radius: 50%; pointer-events: none; z-index: -1;
-            transform: translate(-50%, -50%); transition: opacity 0.3s ease;
+        /* ====== CUSTOM CURSOR ====== */
+        #cursor {
+            width: 20px; height: 20px; background: white; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999; mix-blend-mode: difference;
+            transition: transform 0.15s ease-out;
         }
 
-        /* ====== MODERN NAVIGATION ====== */
+        #cursor-follower {
+            width: 40px; height: 40px; border: 1px solid var(--accent); border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transition: transform 0.25s ease-out, opacity 0.3s;
+        }
+
+        /* ====== NAVIGATION ====== */
         nav {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            z-index: 100; background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px); border: 1px solid var(--border);
-            padding: 8px 12px; border-radius: 100px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+            padding: 6px; border-radius: 100px;
         }
 
-        nav ul { display: flex; list-style: none; gap: 8px; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 5px; }
         nav a {
-            text-decoration: none; color: var(--text-secondary);
-            font-size: 0.85rem; font-weight: 600; padding: 10px 18px;
-            border-radius: 50px; transition: var(--transition);
+            text-decoration: none; color: var(--text-s); font-size: 13px; font-weight: 500;
+            padding: 10px 22px; border-radius: 100px; transition: var(--transition-smooth);
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        nav a:hover, nav a.active { color: var(--text-primary); background: var(--border); }
-
-        .theme-btn {
-            background: none; border: none; color: var(--text-secondary);
-            cursor: pointer; padding: 10px; font-size: 1.1rem;
-            transition: var(--transition);
-        }
+        nav a:hover, nav a.active { color: white; background: rgba(255,255,255,0.05); }
 
         /* ====== HERO SECTION ====== */
         .hero {
-            height: 100vh; display: flex; align-items: center; justify-content: center;
-            padding: 0 10%; position: relative;
+            height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center;
+            padding: 0 8%; position: relative;
         }
 
-        .hero-content { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
-
-        .hero-text h1 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(3rem, 7vw, 5.5rem); line-height: 0.9;
-            margin-bottom: 24px; letter-spacing: -2px;
+        .hero-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: 1400px;
         }
 
-        .hero-text h1 span { color: var(--accent); }
-
-        .hero-text p {
-            font-size: 1.25rem; color: var(--text-secondary);
-            max-width: 500px; line-height: 1.6; margin-bottom: 40px;
+        .hero-info h2 {
+            font-family: 'Space Grotesk', sans-serif; font-weight: 300; font-size: 1.2rem;
+            color: var(--accent); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s forwards 0.2s;
         }
 
-        .image-container {
-            position: relative; width: 100%; aspect-ratio: 1;
-            display: flex; justify-content: center; align-items: center;
+        .hero-info h1 {
+            font-size: clamp(3rem, 10vw, 7.5rem); font-weight: 900; line-height: 0.9;
+            letter-spacing: -4px; margin-bottom: 30px; opacity: 0; animation: fadeUp 0.8s forwards 0.4s;
         }
 
-        .image-blob {
-            width: 80%; height: 80%;
-            background: var(--accent-grad);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            position: absolute; filter: blur(40px); opacity: 0.4;
-            animation: morph 8s ease-in-out infinite alternate;
+        .hero-info p {
+            font-size: 1.1rem; color: var(--text-s); max-width: 450px; margin-bottom: 40px;
+            opacity: 0; animation: fadeUp 0.8s forwards 0.6s;
         }
 
-        .hero-img {
-            width: 100%; height: 100%; object-fit: contain;
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
-            z-index: 1; transition: transform 0.2s ease-out;
+        .image-frame {
+            position: relative; width: 100%; display: flex; justify-content: flex-end;
+            opacity: 0; animation: scaleIn 1.2s forwards 0.8s;
         }
 
-        /* ====== BENTO GRID SECTIONS ====== */
-        section { padding: 120px 10%; max-width: 1400px; margin: 0 auto; }
-        .section-header { margin-bottom: 60px; }
-        .section-header h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 3rem; letter-spacing: -1px; }
+        .avatar-glow {
+            position: absolute; width: 300px; height: 450px; background: var(--accent);
+            filter: blur(120px); opacity: 0.2; bottom: 0; right: 0;
+        }
+
+        .avatar-img {
+            width: 85%; max-width: 450px; height: auto; z-index: 2;
+            filter: grayscale(20%) brightness(110%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+
+        /* ====== BENTO GRID (PROJECTS) ====== */
+        section { padding: 150px 8%; max-width: 1600px; margin: 0 auto; }
+        .section-label { font-size: 12px; text-transform: uppercase; color: var(--accent); letter-spacing: 4px; margin-bottom: 15px; display: block; }
+        .section-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: 800; margin-bottom: 60px; letter-spacing: -2px; }
 
         .bento-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(2, 300px); gap: 20px;
+            display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: 280px; gap: 20px;
         }
 
-        .bento-item {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 32px; padding: 40px; position: relative;
-            overflow: hidden; transition: var(--transition);
+        .bento-card {
+            background: var(--card); border: 1px solid var(--glass-border);
+            border-radius: 30px; padding: 40px; position: relative;
+            overflow: hidden; transition: var(--transition-smooth);
+            display: flex; flex-direction: column; justify-content: flex-end;
         }
 
-        .bento-item:hover { border-color: var(--accent); transform: scale(1.02); }
-
-        .bento-item.large { grid-column: span 2; grid-row: span 2; }
-        .bento-item.wide { grid-column: span 2; }
-
-        .bento-item h3 { font-size: 1.5rem; margin-bottom: 12px; }
-        .bento-item p { color: var(--text-secondary); line-height: 1.6; }
-
-        /* ====== PROJECT CARDS ====== */
-        .project-card { display: flex; flex-direction: column; justify-content: space-between; }
-        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-        .tag {
-            font-size: 0.7rem; font-weight: 700; padding: 6px 12px;
-            background: rgba(255,255,255,0.05); border-radius: 8px;
-            text-transform: uppercase; color: var(--accent);
+        .bento-card:hover { border-color: white; transform: translateY(-10px); background: #111; }
+        .bento-card::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,0.05), transparent 80%);
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
         }
+        .bento-card:hover::after { opacity: 1; }
+
+        .card-1 { grid-column: span 8; }
+        .card-2 { grid-column: span 4; }
+        .card-3 { grid-column: span 4; }
+        .card-4 { grid-column: span 8; }
+
+        .bento-card h3 { font-size: 2rem; font-weight: 700; margin-bottom: 10px; }
+        .bento-card p { color: var(--text-s); font-size: 0.95rem; max-width: 400px; }
+
+        .tag-row { display: flex; gap: 10px; margin-top: 20px; }
+        .tag { font-size: 11px; font-weight: 800; color: white; background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 100px; }
+
+        /* ====== BUTTONS ====== */
+        .btn-main {
+            display: inline-flex; align-items: center; gap: 15px; background: white; color: black;
+            padding: 18px 45px; border-radius: 100px; text-decoration: none; font-weight: 700;
+            font-size: 14px; transition: var(--transition-smooth);
+        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+
+        /* ====== FOOTER ====== */
+        footer { padding: 100px 8%; border-top: 1px solid var(--glass-border); text-align: center; }
+        .footer-logo { font-size: 3rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; }
 
         /* ====== ANIMATIONS ====== */
-        @keyframes morph {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            100% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        /* ====== RESPONSIVE ====== */
-        @media (max-width: 1024px) {
-            .hero-content { grid-template-columns: 1fr; text-align: center; }
-            .hero-text p { margin: 0 auto 40px; }
-            .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
-            .bento-item.large, .bento-item.wide { grid-column: span 1; grid-row: span 1; }
+        /* ====== MOBILE ====== */
+        @media (max-width: 900px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-info p { margin: 0 auto 40px; }
+            .image-frame { justify-content: center; margin-top: 40px; }
+            .bento-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+            .card-1, .card-2, .card-3, .card-4 { grid-column: span 1; min-height: 350px; }
+            nav { bottom: 20px; top: auto; width: 90%; }
         }
     </style>
 </head>
 <body>
-    <div class="grid-bg"></div>
-    <div class="cursor-glow" id="glow"></div>
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+    <div class="mesh-bg"></div>
 
     <!-- ====== NAVIGATION ====== -->
     <nav>
         <ul>
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#work">Work</a></li>
+            <li><a href="#home" class="active">Start</a></li>
+            <li><a href="#work">Projects</a></li>
+            <li><a href="#about">Studio</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><button class="theme-btn" id="themeToggle">☼</button></li>
         </ul>
     </nav>
 
-    <!-- ====== HERO ====== -->
+    <!-- ====== HERO SECTION ====== -->
     <header class="hero" id="home">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Crafting the<br><span>Mobile Future.</span></h1>
-                <p>Tehseen Ul Hassan — Senior Android Engineer specializing in architectural excellence and fluid motion.</p>
-                <div style="display: flex; gap: 12px;">
-                    <a href="#work" style="background: var(--accent); color: white; padding: 16px 32px; border-radius: 100px; text-decoration: none; font-weight: 700;">Explore Work</a>
-                    <a href="#contact" style="border: 1px solid var(--border); color: var(--text-primary); padding: 16px 32px; border-radius: 100px; text-decoration: none; font-weight: 700;">Contact</a>
-                </div>
+        <div class="hero-container">
+            <div class="hero-info">
+                <h2>BASED IN PAKISTAN</h2>
+                <h1>ANDROID<br>ENGINEER.</h1>
+                <p>Architecting high-fidelity mobile experiences with Kotlin Multiplatform and Jetpack Compose.</p>
+                <a href="#work" class="btn-main">EXPLORE ARCHIVE <span>→</span></a>
             </div>
-            <div class="image-container">
-                <div class="image-blob"></div>
-                <img src="image/Confident_Portrait_in_Soft_Light-removebg-preview.png" class="hero-img" id="parallax-img" alt="Portrait">
+            <div class="image-frame">
+                <div class="avatar-glow"></div>
+                <!-- Path fixed to your image -->
+                <img src="image/Confident_Portrait_in_Soft_Light-removebg-preview.png" alt="Tehseen" class="avatar-img" onerror="this.src='https://via.placeholder.com/450x600/0d0d0d/ffffff?text=Portrait'">
             </div>
         </div>
     </header>
 
-    <!-- ====== BENTO WORK ====== -->
-    <section id="work" class="reveal">
-        <div class="section-header">
-            <h2>Digital <span>Ecosystems</span></h2>
-        </div>
+    <!-- ====== WORK SECTION ====== -->
+    <section id="work">
+        <span class="section-label">SELECTED WORKS</span>
+        <h2 class="section-title">Defining Quality Through Code</h2>
+        
         <div class="bento-grid">
-            <div class="bento-item large project-card">
-                <div>
-                    <div class="tag">E-Commerce</div>
-                    <h3>ClickNShop</h3>
-                    <p>High-performance marketplace with real-time state synchronization and biometric payments.</p>
-                </div>
-                <div class="tech-tags">
-                    <span class="tag">Kotlin</span><span class="tag">Compose</span><span class="tag">Firebase</span>
-                </div>
+            <div class="bento-card card-1">
+                <div class="tag-row"><span class="tag">COMMERCE</span><span class="tag">REAL-TIME</span></div>
+                <h3>ClickNShop</h3>
+                <p>Enterprise-grade marketplace featuring synchronized inventory states and biometric security protocols.</p>
             </div>
-            <div class="bento-item wide">
-                <h3>Technical Mastery</h3>
-                <p>Clean Architecture (MVVM/MVI), RoomDB, Ktor, and Coroutines.</p>
+            <div class="bento-card card-2">
+                <div class="tag-row"><span class="tag">CORE</span></div>
+                <h3>DineOps ERP</h3>
+                <p>Full-stack restaurant management built on KMP.</p>
             </div>
-            <div class="bento-item">
-                <h3>AI Innovation</h3>
-                <p>Integrating Gemini & ML Kit into farming solutions.</p>
+            <div class="bento-card card-3">
+                <div class="tag-row"><span class="tag">AI</span></div>
+                <h3>Kisan Guide</h3>
+                <p>Offline-first agricultural intelligence engine using Gemini API.</p>
             </div>
-            <div class="bento-item">
-                <h3>UX Focused</h3>
-                <p>Building interfaces that follow Material 3 & Human Interface Guidelines.</p>
-            </div>
-            <div class="bento-item wide project-card">
-                <div>
-                    <div class="tag">AgriTech</div>
-                    <h3>Kisan Guide</h3>
-                    <p>Revolutionizing agriculture with offline-first AI crop diagnosis.</p>
-                </div>
-                <div class="tech-tags">
-                    <span class="tag">Gemini API</span><span class="tag">ML Kit</span>
-                </div>
+            <div class="bento-card card-4">
+                <div class="tag-row"><span class="tag">SYSTEMS</span><span class="tag">HEALTH</span></div>
+                <h3>Patient Review</h3>
+                <p>Data visualization suite for healthcare analytics with CSV/PDF orchestration.</p>
             </div>
         </div>
     </section>
 
-    <!-- ====== CONTACT SECTION ====== -->
-    <section id="contact" class="reveal">
-        <div class="bento-item wide" style="text-align: center; background: var(--accent); border: none;">
-            <h2 style="color: white; font-size: 3rem; margin-bottom: 20px;">Ready to start?</h2>
-            <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px;">Currently available for elite Android roles and scalable products.</p>
-            <a href="mailto:tehseen161nb@gmail.com" style="background: white; color: var(--accent); padding: 18px 40px; border-radius: 100px; text-decoration: none; font-weight: 800; display: inline-block;">Start Collaboration</a>
+    <!-- ====== FOOTER ====== -->
+    <footer id="contact">
+        <span class="section-label">GET IN TOUCH</span>
+        <div class="footer-logo">TEHSEEN.</div>
+        <p style="margin-bottom: 40px; color: var(--text-s);">Now accepting high-impact remote roles and innovative partnerships.</p>
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <a href="mailto:tehseen161nb@gmail.com" class="btn-main">EMAIL ME</a>
+            <a href="https://linkedin.com" class="btn-main" style="background: transparent; color: white; border: 1px solid var(--glass-border);">LINKEDIN</a>
         </div>
-    </section>
+        <p style="margin-top: 80px; font-size: 11px; opacity: 0.4;">© 2025 ALL RIGHTS RESERVED. CODED WITH PRECISION.</p>
+    </footer>
 
     <script>
-        // Custom Cursor Glow
-        const glow = document.getElementById('glow');
+        // Smooth Cursor Movement
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+        
         window.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
+            const x = e.clientX;
+            const y = e.clientY;
             
-            // Hero Image Parallax
-            const img = document.getElementById('parallax-img');
-            const x = (window.innerWidth / 2 - e.pageX) / 40;
-            const y = (window.innerHeight / 2 - e.pageY) / 40;
-            img.style.transform = `translateX(${x}px) translateY(${y}px) rotateX(${-y}deg) rotateY(${-x}deg)`;
+            cursor.style.transform = `translate(${x - 10}px, ${y - 10}px)`;
+            follower.style.transform = `translate(${x - 20}px, ${y - 20}px)`;
+
+            // Card Light Effect
+            document.querySelectorAll('.bento-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${x - rect.left}px`);
+                card.style.setProperty('--my', `${y - rect.top}px`);
+            });
         });
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            themeToggle.innerText = document.body.classList.contains('light-mode') ? '☾' : '☼';
+        // Click Scale effect
+        window.addEventListener('mousedown', () => {
+            cursor.style.transform += ' scale(0.7)';
+            follower.style.transform += ' scale(1.5)';
+        });
+        window.addEventListener('mouseup', () => {
+            cursor.style.transform = cursor.style.transform.replace(' scale(0.7)', '');
+            follower.style.transform = follower.style.transform.replace(' scale(1.5)', '');
         });
 
-        // Reveal Observer
+        // Parallax Effect for Hero Image
+        const img = document.querySelector('.avatar-img');
+        window.addEventListener('mousemove', (e) => {
+            const moveX = (window.innerWidth / 2 - e.pageX) / 50;
+            const moveY = (window.innerHeight / 2 - e.pageY) / 50;
+            img.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
+        });
+
+        // Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('section').forEach(sec => {
+            sec.style.opacity = '0';
+            sec.style.transform = 'translateY(50px)';
+            sec.style.transition = 'all 1s ease-out';
+            observer.observe(sec);
+        });
 
-        // Navigation Active Highlight
+        // Nav Active State
         window.addEventListener('scroll', () => {
             let current = "";
             document.querySelectorAll('section, header').forEach((section) => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
+                if (pageYOffset >= section.offsetTop - 200) {
                     current = section.getAttribute("id");
                 }
             });
-
             document.querySelectorAll('nav a').forEach((a) => {
-                a.classList.remove("active");
-                if (a.getAttribute("href").includes(current)) {
-                    a.classList.add("active");
-                }
+                a.classList.toggle("active", a.getAttribute("href") === "#" + current);
             });
         });
     </script>
