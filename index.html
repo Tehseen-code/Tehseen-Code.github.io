@@ -3,307 +3,376 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tehseen Ul Hassan | Android Developer Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <title>Tehseen Ul Hassan | Android Architect & Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ====== THEME (New Professional Color Scheme) ====== */
-    :root{
-      --bg: #f6f7fb;            /* page background */
-      --text: #0f172a;          /* primary text (slate-900) */
-      --muted: #475569;         /* secondary text */
-      --card: #ffffff;          /* card background */
-      --accent: #6366f1;        /* indigo */
-      --accent-2: #22d3ee;      /* teal */
-      --accent-grad: linear-gradient(135deg,#6366f1 0%,#22d3ee 100%);
-      --header-grad: linear-gradient(135deg,#0b1020 0%,#111827 50%,#1f2937 100%); /* deep navy */
-      --nav-bg: rgba(255,255,255,0.75);
-      --nav-border: rgba(99,102,241,0.15);
-      --shadow: 0 12px 30px rgba(2,6,23,.15);
-    }
-    /* Optional dark theme (toggleable) */
-    .dark{
-      --bg: #0b1020;
-      --text:#e5e7eb;
-      --muted:#94a3b8;
-      --card:#111827;
-      --accent:#22d3ee;
-      --accent-2:#a78bfa;
-      --accent-grad: linear-gradient(135deg,#22d3ee,#a78bfa);
-      --header-grad: linear-gradient(135deg,#020617,#0b1020,#111827);
-      --nav-bg: rgba(2,6,23,.6);
-      --nav-border: rgba(34,211,238,0.15);
-      --shadow: 0 12px 40px rgba(0,0,0,.5);
+    /* ====== DESIGN TOKENS ====== */
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #06b6d4;
+      --bg-light: #f8fafc;
+      --bg-dark: #020617;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.3);
+      --accent-grad: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    *{margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
-    html{scroll-behavior:smooth;}
-    body{background:var(--bg); color:var(--text); line-height:1.65;}
+    .dark {
+      --bg-light: #020617;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --card-bg: rgba(15, 23, 42, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.05);
+      --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ====== GLOBAL STYLES ====== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { 
+      background: var(--bg-light); 
+      color: var(--text-main); 
+      font-family: 'Inter', sans-serif; 
+      transition: background 0.5s ease;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+
+    /* ====== BACKGROUND ANIMATION ====== */
+    #bg-canvas {
+      position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%;
+      opacity: 0.4; pointer-events: none;
+    }
 
     /* ====== HEADER / HERO ====== */
-    header{
-      background:var(--header-grad);
-      color:#fff;
-      padding:90px 20px 70px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-    }
-    header .avatar{
-      width:150px; height:150px; border-radius:50%;
-      border:4px solid rgba(255,255,255,.9);
-      margin:0 auto 20px; display:block;
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
-      object-fit:cover; object-position:center;
-      animation:fadeInDown 1.2s ease;
-    }
-    header h1{font-size:3rem; letter-spacing:.5px; margin-bottom:12px; animation:fadeIn .9s ease both;}
-    header .tagline{
-      font-size:1.15rem; opacity:.95; margin:0 auto; max-width:780px;
-      background:linear-gradient(90deg,#c7d2fe,#a5b4fc,#67e8f9,#c7d2fe);
-      background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
-      animation:flow 10s linear infinite, fadeInUp 1s ease .15s both;
+    header {
+      min-height: 85vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; position: relative; padding: 20px;
+      background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
     }
 
-    /* ====== NAVBAR ====== */
-    nav{
-      position:sticky; top:0; z-index:1000;
-      background:var(--nav-bg);
-      backdrop-filter: blur(8px);
-      border-bottom:1px solid var(--nav-border);
+    .avatar-wrapper {
+      position: relative;
+      animation: float 6s ease-in-out infinite;
     }
-    nav .wrap{display:flex; align-items:center; justify-content:center; gap:18px; padding:14px 10px;}
-    #themeToggle{
-      position:absolute; right:18px; top:10px; cursor:pointer; border:none; outline:none;
-      padding:8px 14px; border-radius:999px; font-weight:600; color:#fff;
-      background:var(--accent-grad); box-shadow:0 6px 16px rgba(99,102,241,.35);
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    #themeToggle:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(99,102,241,.4);}    
 
-    nav ul{display:flex; list-style:none; gap:28px;}
-    nav a{
-      text-decoration:none; font-weight:600; color:var(--text); position:relative; transition:color .25s, transform .25s;
+    header .avatar {
+      width: 180px; height: 180px; border-radius: 40% 60% 70% 30% / 40% 50% 60% 40%;
+      border: 4px solid var(--primary);
+      box-shadow: var(--shadow-xl);
+      object-fit: cover;
+      transition: var(--transition);
     }
-    .dark nav a{color:#e5e7eb;}
-    nav a::after{
-      content:""; position:absolute; left:0; bottom:-6px; height:3px; width:0; border-radius:2px; background:var(--accent-grad); transition:width .25s ease;
+
+    header h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 800; line-height: 1.1; margin: 24px 0 16px;
+      background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
     }
-    nav a:hover{transform:translateY(-3px);} 
-    nav a:hover::after{width:100%;}
-    nav a.active{color:var(--accent);} 
-    nav a.active::after{width:100%;}
+
+    header .tagline {
+      font-size: 1.25rem; font-weight: 500; color: var(--text-muted);
+      max-width: 800px; margin: 0 auto; letter-spacing: 0.5px;
+    }
+
+    /* ====== NAVIGATION ====== */
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--card-bg); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 12px 0;
+    }
+
+    .nav-container {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    nav ul { display: flex; list-style: none; gap: 32px; }
+    nav a {
+      text-decoration: none; font-weight: 600; color: var(--text-main); font-size: 0.95rem;
+      position: relative; padding: 4px 0; transition: var(--transition);
+    }
+
+    nav a::after {
+      content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 2px;
+      background: var(--primary); transition: var(--transition);
+    }
+
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    
+    .theme-toggle {
+      background: var(--primary); border: none; width: 40px; height: 40px;
+      border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: white; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4); transition: var(--transition);
+    }
 
     /* ====== SECTIONS ====== */
-    section{padding:80px 10%; scroll-margin-top:90px;}
-    .section-title{ text-align:center; font-size:2.35rem; font-weight:700; margin-bottom:48px; position:relative; }
-    .section-title::after{ content:""; display:block; width:70px; height:4px; background:var(--accent-grad); margin:12px auto 0; border-radius:2px; }
-    .about p{ max-width:900px; margin:0 auto; text-align:center; font-size:1.08rem; color:var(--muted);} 
+    section { padding: 100px 10%; max-width: 1400px; margin: 0 auto; }
+    .section-title { 
+      font-size: 2.5rem; font-weight: 800; margin-bottom: 60px; text-align: center;
+      position: relative;
+    }
+    .section-title span { color: var(--primary); }
 
-    /* ====== GRID / CARDS ====== */
-    .skills-grid, .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:26px; }
-    .skill, .project{ background:var(--card); border-radius:18px; padding:22px; box-shadow:var(--shadow); transition:transform .3s, box-shadow .3s; position:relative; overflow:hidden; }
-    .skill::before, .project::before{ content:""; position:absolute; left:0; top:0; height:5px; width:100%; background:var(--accent-grad); }
-    .skill:hover, .project:hover{ transform:translateY(-8px); box-shadow:0 18px 40px rgba(2,6,23,.2); }
+    /* ====== CARDS ====== */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+    
+    .card {
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: 24px; padding: 32px; box-shadow: var(--shadow-sm);
+      transition: var(--transition); position: relative;
+    }
 
-    .skill h3, .project h3{ margin-bottom:12px; color:var(--text);} 
-    .skill p{ color:var(--muted);} 
+    .card:hover {
+      transform: translateY(-12px); box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
 
-    .project p{ font-size:.98rem; margin-bottom:10px; color:var(--muted); }
-    .project strong{ color:var(--text); }
+    .skill-icon {
+      width: 50px; height: 50px; background: var(--accent-grad);
+      border-radius: 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 1.5rem;
+    }
 
-    .chips{ display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 6px; }
-    .chip{ font-size:.8rem; padding:6px 10px; border-radius:999px; background:rgba(99,102,241,.12); }
-    .dark .chip{ background:rgba(34,211,238,.15); }
+    /* ====== PROJECTS ====== */
+    .project-card {
+      display: flex; flex-direction: column; height: 100%;
+    }
+    .project-card h3 { font-size: 1.5rem; margin-bottom: 16px; color: var(--text-main); }
+    .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+    
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .tag {
+      font-size: 0.75rem; font-weight: 700; padding: 6px 12px; border-radius: 8px;
+      background: rgba(99, 102, 241, 0.1); color: var(--primary); text-transform: uppercase;
+    }
 
     /* ====== BUTTONS ====== */
-    .cta-btn{
-      display:inline-block; margin-top:14px; padding:10px 20px; border-radius:999px; font-weight:700; letter-spacing:.2px;
-      color:#fff; text-decoration:none; background:var(--accent-grad);
-      box-shadow:0 10px 20px rgba(99,102,241,.35); transition:transform .25s ease, box-shadow .25s ease;
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 14px; font-weight: 700;
+      text-decoration: none; transition: var(--transition);
+      cursor: pointer; border: none;
     }
-    .cta-btn:hover{ transform:translateY(-2px) scale(1.03); box-shadow:0 16px 28px rgba(99,102,241,.45); }
-
-    /* ====== CONTACT ====== */
-    #contact p{ text-align:center; font-size:1.05rem; color:var(--muted); }
-    .contact-actions{ text-align:center; margin-top:22px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5); }
+    
+    .btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+    .btn-outline:hover { background: var(--primary); color: white; }
 
     /* ====== FOOTER ====== */
-    footer{ background:#0f172a; color:#e5e7eb; text-align:center; padding:42px 20px; margin-top:60px; }
-    footer p{ margin:10px 0; }
+    footer { 
+      background: #020617; color: #94a3b8; padding: 60px 20px; text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
 
     /* ====== ANIMATIONS ====== */
-    @keyframes fadeIn{ from{opacity:0} to{opacity:1} }
-    @keyframes fadeInUp{ from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:translateY(0)} }
-    @keyframes fadeInDown{ from{opacity:0; transform:translateY(-14px)} to{opacity:1; transform:translateY(0)} }
-    @keyframes flow{ 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0px); } }
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
-    /* reveal on scroll */
-    .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;} 
-    .reveal.show{opacity:1; transform:translateY(0);} 
-
-    /* Responsive tweaks */
-    @media (max-width:640px){
-      header h1{font-size:2.15rem}
-      header .tagline{font-size:1rem}
-      nav .wrap{padding:12px 8px}
+    @media (max-width: 768px) {
+      section { padding: 60px 5%; }
+      nav ul { display: none; }
+      header h1 { font-size: 3rem; }
     }
   </style>
 </head>
 <body>
+  <canvas id="bg-canvas"></canvas>
+
   <!-- ====== HEADER ====== -->
   <header>
-    <!-- Replace src with your own image path in the repo (e.g., images/tehseen.jpg) -->
-    <img class="avatar" src="image/Confident_Portrait_in_Soft_Light-removebg-preview.png" alt="Tehseen Ul Hassan" />
-    <h1>Tehseen Ul Hassan</h1>
-    <p class="tagline">Android Developer &nbsp;•&nbsp; Kotlin &nbsp;•&nbsp; Jetpack Compose &nbsp;•&nbsp; Firebase &nbsp;•&nbsp; REST APIs</p>
+    <div class="avatar-wrapper">
+      <img class="avatar" src="https://via.placeholder.com/180" alt="Tehseen Ul Hassan" />
+    </div>
+    <h1>Android Architect.</h1>
+    <p class="tagline">I build scalable, high-performance mobile ecosystems with Kotlin & Jetpack Compose.</p>
+    <div style="margin-top: 40px; display: flex; gap: 16px;">
+      <a href="#projects" class="btn btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn btn-outline">Let's Talk</a>
+    </div>
   </header>
 
   <!-- ====== NAVBAR ====== -->
-  <nav>
-    <button id="themeToggle" aria-label="Toggle theme">Theme</button>
-    <div class="wrap">
+  <nav id="navbar">
+    <div class="nav-container">
+      <div style="font-weight: 800; font-size: 1.2rem; letter-spacing: -1px;">TEHSEEN.<span>DEV</span></div>
       <ul>
         <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Expertise</a></li>
+        <li><a href="#projects">Work</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <button class="theme-toggle" id="themeToggle">🌓</button>
     </div>
   </nav>
 
   <!-- ====== ABOUT ====== -->
-  <section id="about" class="about reveal">
-    <h2 class="section-title">About Me</h2>
-    <p>I am an Android Developer passionate about building modern, scalable, and user-friendly mobile applications. With experience in Kotlin, Jetpack Compose, and Firebase, I craft apps that solve real-world problems. Currently seeking opportunities for remote jobs, internships, or freelance work to showcase my expertise in Android development.</p>
+  <section id="about" class="reveal">
+    <h2 class="section-title">Beyond the <span>Code</span></h2>
+    <div class="card" style="text-align: center; max-width: 900px; margin: 0 auto;">
+      <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8;">
+        I am a dedicated Android Developer focused on the intersection of design and engineering. My philosophy is simple: build apps that are as beautiful on the inside (clean architecture) as they are on the outside (UX/UI). With a mastery of the modern Android stack, I help businesses scale through mobile-first innovation.
+      </p>
+    </div>
   </section>
 
   <!-- ====== SKILLS ====== -->
   <section id="skills" class="reveal">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill"><h3>Languages</h3><p>Kotlin, Java, XML</p></div>
-      <div class="skill"><h3>Frameworks</h3><p>Jetpack Compose, Android SDK</p></div>
-      <div class="skill"><h3>Backend</h3><p>Firebase, REST APIs</p></div>
-      <div class="skill"><h3>Tools</h3><p>Git, GitHub, Android Studio</p></div>
+    <h2 class="section-title">Technical <span>Expertise</span></h2>
+    <div class="grid">
+      <div class="card">
+        <div class="skill-icon">📱</div>
+        <h3>Modern UI</h3>
+        <p>Expert in Jetpack Compose, Material 3, and creating fluid, motion-rich interfaces that feel natural.</p>
+      </div>
+      <div class="card">
+        <div class="skill-icon">🏗️</div>
+        <h3>Architecture</h3>
+        <p>Strict adherence to MVVM/MVI patterns with Clean Architecture and SOLID principles.</p>
+      </div>
+      <div class="card">
+        <div class="skill-icon">🔥</div>
+        <h3>Backend Integration</h3>
+        <p>Seamlessly connecting apps to Firebase, RESTful APIs using Ktor/Retrofit and Coroutines.</p>
+      </div>
+      <div class="card">
+        <div class="skill-icon">🛡️</div>
+        <h3>Persistence</h3>
+        <p>Efficient local data management using Room Database and DataStore for offline-first experiences.</p>
+      </div>
     </div>
   </section>
 
   <!-- ====== PROJECTS ====== -->
   <section id="projects" class="reveal">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-      <div class="project">
-        <h3>ClickNShop - E-Commerce App</h3>
-        <div class="chips">
-          <span class="chip">Mobile</span>
-          <span class="chip">E‑Commerce</span>
-          <span class="chip">Jetpack Compose</span>
+    <h2 class="section-title">Selected <span>Projects</span></h2>
+    <div class="grid">
+      <!-- Project 1 -->
+      <div class="card project-card">
+        <div class="tech-stack">
+          <span class="tag">E-Commerce</span>
+          <span class="tag">Compose</span>
         </div>
-        <p><strong>Features:</strong> Product search by bar/categories, detailed product pages, add to cart, buy functionality, user profile management, admin panel to add/manage categories & orders.</p>
-        <p><strong>Tech Stack:</strong> Kotlin, Jetpack Compose, Firebase.</p>
-        <a href="https://www.linkedin.com/in/tehseen-ul-hassan-93882b2b9" target="_blank" rel="noopener" class="cta-btn">View on LinkedIn</a>
+        <h3>ClickNShop</h3>
+        <p>A flagship enterprise e-commerce solution featuring real-time inventory sync and secure payment gateways.</p>
+        <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Case Study</a>
       </div>
 
-      <div class="project">
-        <h3>Kisan Guide - Smart Farming App</h3>
-        <div class="chips">
-          <span class="chip">Mobile</span>
-          <span class="chip">AI</span>
-          <span class="chip">AgriTech</span>
+      <!-- Project 2 -->
+      <div class="card project-card">
+        <div class="tech-stack">
+          <span class="tag">AgriTech</span>
+          <span class="tag">Gemini AI</span>
         </div>
-        <p><strong>Features:</strong> Real-time weather updates, disease scanner, Gemini AI integration, YouTube learning integration, government scheme updates for farmers.</p>
-        <p><strong>Tech Stack:</strong> Kotlin, Firebase, Gemini API, ML integration.</p>
-        <a href="https://www.linkedin.com/in/tehseen-ul-hassan-93882b2b9" target="_blank" rel="noopener" class="cta-btn">View on LinkedIn</a>
+        <h3>Kisan Guide</h3>
+        <p>AI-driven agricultural assistant using Gemini API for real-time crop disease detection and weather forecasting.</p>
+        <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Case Study</a>
       </div>
 
-      <div class="project">
-        <h3>Patients Review System – NSIC</h3>
-        <div class="chips">
-          <span class="chip">Surveys</span>
-          <span class="chip">Charts</span>
-          <span class="chip">Admin Dashboard</span>
+      <!-- Project 3 -->
+      <div class="card project-card">
+        <div class="tech-stack">
+          <span class="tag">HealthCare</span>
+          <span class="tag">Analytics</span>
         </div>
-        <p><strong>Features:</strong> Patients submit reviews by age/gender, admin dashboard to analyze responses, generate pie charts by demographics & questions, export results in CSV/PDF format.</p>
-        <p><strong>Tech Stack:</strong> Kotlin, Firebase, Chart libraries, PDF/CSV exporter.</p>
-        <a href="https://www.linkedin.com/in/tehseen-ul-hassan-93882b2b9" target="_blank" rel="noopener" class="cta-btn">View on LinkedIn</a>
-      </div>
-
-      <div class="project">
-        <h3>Quick Notes App</h3>
-        <div class="chips">
-          <span class="chip">Offline First</span>
-          <span class="chip">Room DB</span>
-          <span class="chip">Compose</span>
-        </div>
-        <p><strong>Features:</strong> Create, edit, delete, and organize notes with a simple UI. Fast, lightweight, and fully offline-capable.</p>
-        <p><strong>Tech Stack:</strong> Kotlin, Room DB, Jetpack Compose.</p>
-        <a href="https://www.linkedin.com/in/tehseen-ul-hassan-93882b2b9" target="_blank" rel="noopener" class="cta-btn">View on LinkedIn</a>
+        <h3>NSIC Review System</h3>
+        <p>Sophisticated patient feedback engine with an admin dashboard for deep demographic data visualization.</p>
+        <a href="#" class="btn btn-outline" style="width: 100%; justify-content: center;">Case Study</a>
       </div>
     </div>
   </section>
 
   <!-- ====== CONTACT ====== -->
   <section id="contact" class="reveal">
-    <h2 class="section-title">Contact</h2>
-    <p>Interested in working together? Feel free to reach out.</p>
-    <div class="contact-actions">
-      <a href="mailto:tehseen161nb@gmail.com" class="cta-btn">Email Me</a>
-      <a href="https://www.linkedin.com/in/tehseen-ul-hassan-93882b2b9" target="_blank" rel="noopener" class="cta-btn">LinkedIn</a>
-      <a href="https://github.com/Tehseen-code" target="_blank" rel="noopener" class="cta-btn">GitHub</a>
+    <div class="card" style="background: var(--accent-grad); color: white; text-align: center; padding: 60px 40px; border: none;">
+      <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to build something iconic?</h2>
+      <p style="opacity: 0.9; font-size: 1.1rem; margin-bottom: 40px;">I'm currently accepting new remote roles and high-impact freelance projects.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="mailto:tehseen161nb@gmail.com" class="btn" style="background: white; color: var(--primary);">Email Me</a>
+        <a href="https://linkedin.com" class="btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid white;">LinkedIn</a>
+      </div>
     </div>
   </section>
 
   <!-- ====== FOOTER ====== -->
   <footer>
-    <p>© 2025 Tehseen Ul Hassan. All Rights Reserved.</p>
+    <div style="margin-bottom: 24px; font-weight: 800; font-size: 1.5rem; color: white;">TEHSEEN.<span>UL.HASSAN</span></div>
+    <p>© 2025 Handcrafted with ❤️ using Jetpack Design Philosophy.</p>
   </footer>
 
-  <!-- ====== SMALL JS: ScrollSpy, Reveal-on-Scroll, Smooth anchor, Theme Toggle ====== -->
   <script>
-    // Theme toggle & persistence
-    const root = document.documentElement;
-    const savedTheme = localStorage.getItem('theme');
-    if(savedTheme === 'dark'){ root.classList.add('dark'); }
-    document.getElementById('themeToggle').addEventListener('click', ()=>{
-      root.classList.toggle('dark');
-      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    // Theme Toggle
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
     });
+    if(localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
 
-    // ScrollSpy to highlight active nav link
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a');
-    const spy = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-        }
+    // Reveal Logic
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('active');
       });
-    }, {rootMargin: '-50% 0px -50% 0px', threshold: 0});
-    sections.forEach(s=>spy.observe(s));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Smooth anchor (extra easing on top of CSS smooth)
-    document.querySelectorAll('nav a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if(!el) return;
-        window.scrollTo({ top: el.offsetTop - 70, behavior: 'smooth' });
-      });
-    });
+    // Particle Background Effect
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
 
-    // Reveal-on-scroll effect
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){ entry.target.classList.add('show'); revealer.unobserve(entry.target); }
-      });
-    }, {threshold: .1});
-    revealEls.forEach(el=>revealer.observe(el));
+    function initCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if(this.x > canvas.width || this.x < 0 || this.y > canvas.height || this.y < 0) this.reset();
+      }
+      draw() {
+        ctx.fillStyle = '#6366f1';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', initCanvas);
+    initCanvas();
+    particles = Array.from({length: 50}, () => new Particle());
+    animate();
   </script>
 </body>
 </html>
-
-
